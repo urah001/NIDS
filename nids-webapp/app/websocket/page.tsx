@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+"use client"
 import { useEffect, useState } from "react";
 
  function WebSocketPage() {
@@ -17,18 +19,19 @@ import { useEffect, useState } from "react";
     };
 
     socket.onerror = (error) => {
-      console.error("WebSocket error:", error);
+      console.log("WebSocket error:", error);
     };
 
     // Clean up the connection when the component is unmounted
     return () => {
       socket.close();
     };
-  }, []);
+  }, [socket]);
 
   const sendData = () => {
     const packetData = input; // Example: 'tcp,80,80,10' (replace with actual packet data)
     socket.send(packetData);
+    alert("sent")
   };
 
   return (
