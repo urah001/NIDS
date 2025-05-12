@@ -1,26 +1,28 @@
-import joblib
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
 import joblib
 
-# the train data
-train=pd.read_csv('https://raw.githubusercontent.com/urah001/wiresharkDataset/refs/heads/main/Train_data.csv')
-#the test data
-test=pd.read_csv('https://raw.githubusercontent.com/urah001/wiresharkDataset/refs/heads/main/custech_test_data.csv')
+# Load your dataset
+train=pd.read_csv('https://raw.githubusercontent.com/urah001/wiresharkDataset/refs/heads/main/Train_data.csv') # Replace with actual path
 
-# Features and labels
-X = train.drop(columns=["label"])  # Features
-y = train["label"]  # Labels: 0 = normal, 1 = intrusion
+# Encode categorical columns
+categorical_cols = ['protocol_type', 'service', 'flag']  # Add more if needed
+le = LabelEncoder()
 
+for col in categorical_cols:
+    train[col] = le.fit_transform(train[col])
 
-# Split into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# Separate features and label
+X = train.drop(columns=["class"])  # Your label column is 'class', not 'label'
+y = train["class"]
 
-# Train Random Forest Classifier
-model = RandomForestClassifier(n_estimators=100)
-model.fit(X_train, y_train)
+# Encode labels (optional if not already binary or numerical)
+y = LabelEncoder().fit_transform(y)
 
-# Save the trained model
-joblib.dump(model, "model.joblib")
+# Train the model
+model = RandomForestClassifier()
+model.fit(X, y)
+
+# Save model
+joblib.dump(model, "nids_model.pkl")
