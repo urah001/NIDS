@@ -14,7 +14,13 @@ for col in categorical_cols:
     train[col] = le.fit_transform(train[col])
 
 # Separate features and label
-X = train.drop(columns=["class"])  # Your label column is 'class', not 'label'
+# Instead of:
+# X = train[["duration", "src_bytes", "dst_bytes", "count", "srv_count"]]
+
+# Do this:
+X = train.drop(columns=["class"])  # All features except the label
+
+ # Your label column is 'class', not 'label'
 y = train["class"]
 
 # Encode labels (optional if not already binary or numerical)
@@ -23,6 +29,8 @@ y = LabelEncoder().fit_transform(y)
 # Train the model
 model = RandomForestClassifier()
 model.fit(X, y)
+
+#print(train.columns.tolist())
 
 # Save model
 joblib.dump(model, "nids_model.pkl")

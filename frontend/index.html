@@ -1,40 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebSocket Connection</title>
+  <title>Web NIDS</title>
 </head>
 <body>
-  <h1>Network Intrusion Detection</h1>
-  <button id="sendData">Send Packet Data</button>
-  <div id="result"></div>
+  <h1>Intrusion Detection Dashboard</h1>
+  <div id="alerts"></div>
 
   <script>
-    // Connect to WebSocket server
-    const socket = new WebSocket("ws://127.0.0.1:8000/ws");
+    async function fetchAlerts() {
+      const res = await fetch("http://127.0.0.1:5000/alerts");
+      const data = await res.json();
+      const alertsDiv = document.getElementById("alerts");
+      alertsDiv.innerHTML = "";
+      data.alerts.forEach(alert => {
+        alertsDiv.innerHTML += `<p>🚨 ${alert.msg} - Source: ${alert.src}</p>`;
+      });
+    }
 
-    // Handle connection open
-    socket.onopen = () => {
-      console.log("Connected to WebSocket server");
-    };
-
-    // Handle messages from server
-    socket.onmessage = (event) => {
-      document.getElementById("result").innerText = event.data;
-    };
-
-    // Handle WebSocket errors
-    socket.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-
-    // Send data to WebSocket server when the button is clicked
-    document.getElementById("sendData").addEventListener("click", () => {
-      // Example packet data (replace with actual data)
-      const packetData = "tcp,80,80,10"; // Example: 'protocol,src_port,dst_port,src_bytes'
-      socket.send(packetData);
-    });
+    setInterval(fetchAlerts, 3000); // Poll every 3s
   </script>
 </body>
 </html>
