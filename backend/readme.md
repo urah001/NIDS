@@ -49,8 +49,9 @@ You can generate traffic using tools like:
 
 Example:
 
-```bash
+```
 sudo nmap -sS 192.168.1.x
+
 ```
 
 Let me know if you want help expanding the features or building a dashboard!
