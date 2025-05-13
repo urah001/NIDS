@@ -17,7 +17,7 @@ for col in categorical_cols:
 # Instead of:
 # X = train[["duration", "src_bytes", "dst_bytes", "count", "srv_count"]]
 
-# Do this:
+
 X = train.drop(columns=["class"])  # All features except the label
 
  # Your label column is 'class', not 'label'
