@@ -3,7 +3,10 @@
 
 to run : 
  sudo "$(which python)" -u "/home/w3b/Documents/400Project/project/web-NIDS/backend/realtime_nids.py" 
- 
+ to run this file , user needs sudo/root priviledge to run this file therefore use this command in user is in linux : 
+ ```
+ sudo "$(which python)" -u "/home/w3b/Documents/400Project/project/web-NIDS/backend/realtime_nids.py" 
+ ````
 
 ### how it works:
 
