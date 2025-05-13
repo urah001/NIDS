@@ -42,8 +42,8 @@ def log_alert(msg, src, dst):
     }
     print(f"[ALERT] {msg} from {src} to {dst}")
     alerts.append(alert)
-    if len(alerts) > 100:
-        alerts.pop(0)  # Keep only last 100
+    if len(alerts) > 200:
+        alerts.pop(0)  # Keep only last 200
 
 
 # === Sniffing Thread ===
