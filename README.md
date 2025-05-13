@@ -129,9 +129,3 @@ Or target a device on your LAN:
 ```bash
 sudo nmap -sS 192.168.1.5
 ```
-
----
-
-Let me know what kind of attacks you want to simulate next — like brute force, malware-like traffic, DNS tunneling, etc.
-
-
