@@ -1,24 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Web NIDS</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live NIDS Dashboard</title>
+  <style>
+    body { font-family: Arial; background: #111; color: #fff; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #444; padding: 8px; text-align: left; }
+    th { background-color: #333; }
+    tr:nth-child(even) { background-color: #222; }
+    h1 { color: #0f0; }
+  </style>
 </head>
 <body>
-  <h1>Intrusion Detection Dashboard</h1>
-  <div id="alerts"></div>
+  <h1>🚨 Live Network Intrusion Alerts</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>Alert</th>
+        <th>Source</th>
+        <th>Destination</th>
+      </tr>
+    </thead>
+    <tbody id="alert-table">
+      <!-- Alert rows will go here -->
+    </tbody>
+  </table>
 
   <script>
     async function fetchAlerts() {
-      const res = await fetch("http://127.0.0.1:5000/alerts");
+      const res = await fetch('/alerts');
       const data = await res.json();
-      const alertsDiv = document.getElementById("alerts");
-      alertsDiv.innerHTML = "";
+      const table = document.getElementById('alert-table');
+      table.innerHTML = '';
       data.alerts.forEach(alert => {
-        alertsDiv.innerHTML += `<p>🚨 ${alert.msg} - Source: ${alert.src}</p>`;
+        const row = `<tr>
+          <td>${alert.timestamp}</td>
+          <td>${alert.msg}</td>
+          <td>${alert.src}</td>
+          <td>${alert.dst}</td>
+        </tr>`;
+        table.innerHTML += row;
       });
     }
 
-    setInterval(fetchAlerts, 3000); // Poll every 3s
+    fetchAlerts();
+    setInterval(fetchAlerts, 3000);
   </script>
 </body>
 </html>

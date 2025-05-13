@@ -7,55 +7,6 @@ warnings.filterwarnings("ignore")
 
 model = joblib.load('nids_model.pkl')
 
-# def process_packet(packet):
-#     try:
-#         if not packet.haslayer(IP):
-#             return
-
-#         protocol_type = 1 if packet.haslayer(TCP) else 2 if packet.haslayer(UDP) else 0
-#         src_bytes = len(packet[IP].payload)
-        
-#         features = [0, protocol_type, src_bytes, 0] + [0]*37  # 41 total
-#         processed = preprocess_function([features])
-
-#         prediction = model.predict(processed)[0]
-
-#         if prediction == 1:
-#             print(f"🚨 Alert: Intrusion from {packet[IP].src}")
-#             with open('alerts.log', 'a') as f:
-#                 f.write(f"[ALERT] Malicious packet from {packet[IP].src}\n")
-#         else:
-#             print(f"✅ Normal traffic from {packet[IP].src}")
-
-#     except Exception as e:
-#         print(f"Error: {e}")
-
-# #def process_packet(packet):
-#     try:
-#         if not packet.haslayer(IP):
-#             return
-
-#         protocol_type = 1 if packet.haslayer(TCP) else 2 if packet.haslayer(UDP) else 0
-#         src_bytes = len(packet[IP].payload)
-        
-#         # Construct a single-row list (41 features)
-#         features = [0, protocol_type, src_bytes, 0] + [0]*37
-
-#         # Preprocess and predict
-#         processed = preprocess_function([features])  # Ensure this returns a 2D array
-
-#         prediction = model.predict(processed)[0]
-
-#         if prediction == 1:
-#             print(f"🚨 Alert: Intrusion from {packet[IP].src}")
-#             with open('alerts.log', 'a') as f:
-#                 f.write(f"[ALERT] Malicious packet from {packet[IP].src}\n")
-#         else:
-#             print(f"✅ Normal traffic from {packet[IP].src}")
-
-#     except Exception as e:
-#         print(f"Error: {e}")
-
 def process_packet(packet):
     try:
         if not packet.haslayer(IP):

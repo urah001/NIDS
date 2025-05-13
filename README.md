@@ -1,6 +1,8 @@
 # remember 
  remember to find a good dataset for the ML model 
 
+to run : 
+ sudo "$(which python)" -u "/home/w3b/Documents/400Project/project/web-NIDS/backend/realtime_nids.py" 
  
 
 ### how it works:
