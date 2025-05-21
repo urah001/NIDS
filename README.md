@@ -1,5 +1,6 @@
 # remember 
- remember to find a good dataset for the ML model 
+ remember to find a good dataset for the ML model for new test 
+ check if dev can merge two or more dataset together to make a hybrid dataset to test and train the network
 
 to run : 
  sudo "$(which python)" -u "/home/w3b/Documents/400Project/project/web-NIDS/backend/realtime_nids.py" 
