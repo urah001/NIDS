@@ -1,12 +1,25 @@
-# remember 
- remember to find a good dataset for the ML model for new test 
- check if dev can merge two or more dataset together to make a hybrid dataset to test and train the network
 
-to run : 
+
+# how to run 
+
+- to run the system or program , user first needs to navigate to the dir where the dashboard_server.py is located 
+- then write this command :  sudo "$(which python)" -u "/home/w3b/Documents/400Project/project/web-NIDS/backend/dashboard_server.py" 
+- ps this system was built in a kali linux eniviroment , which the reason for the `sudo` 
+- the user needs to go to their localhost:5000 on their broswer or any server rendering application to view the ip causing intrusion on their network 
+- this system has been trained by a dataset varified and collected for keggle and tested with CUSTECH wifi and it proved to very effective 
+- this system detect and report intrusion 
+- this system report : timestamp  alert  source-ip  destination-ip
+
+
+# to run : 
+ 
  sudo "$(which python)" -u "/home/w3b/Documents/400Project/project/web-NIDS/backend/realtime_nids.py" 
+ 
  to run this file , user needs sudo/root priviledge to run this file therefore use this command in user is in linux : 
+
  ```
  sudo "$(which python)" -u "/home/w3b/Documents/400Project/project/web-NIDS/backend/realtime_nids.py" 
+ 
  ````
 
 ### how it works:
@@ -19,39 +32,13 @@ to run :
 
 ---
 
-### 📊 Next Steps (optional but useful):
-
-#### 1. **Live dashboard for alerts**
-
-* Since you already have a `Flask` backend (`backend_app.py`), you can build a simple frontend to fetch `/alerts` in real time using JavaScript.
-
-#### 2. **Log more features**
-
-* You're currently using a lot of `0`s in your 41-feature array:
-
-  ```python
-  features = [0, protocol_type, src_bytes, 0] + [0]*37
-  ```
-* You might want to extract more meaningful features like:
-
-  * `dst_bytes`
-  * `service`
-  * `flag`
-  * `logged_in`, etc.
-* Or at least match what your model was trained on (from `modelTraining.py`).
-
-#### 3. **Store alerts in a database**
-
-* Instead of just `alerts.log`, you could use SQLite or PostgreSQL (you're already using Supabase, right?) to store alert history.
-
----
 
 ### 🔍 Want to test it?
 
 You can generate traffic using tools like:
 
-* `ping` or `curl` for normal packets.
-* `nmap`, `hping3`, or `msfconsole` for simulating suspicious activity (e.g., port scans, DoS).
+ `ping` or `curl` for normal packets.
+ `nmap`, `hping3`, or `msfconsole` for simulating suspicious activity (e.g., port scans, DoS).
 
 Example:
 
@@ -62,11 +49,9 @@ sudo nmap -sS 192.168.1.x
 
 how to generate **abnormal/malicious-looking traffic** for testing The NIDS:
 
-> ⚠️ **Use only on networks you own or have permission to test. Unauthorized scanning is illegal.**
 
 ---
-
-### 🛠 1. **Port Scanning** (SYN scan)
+  1. **Port Scanning** (SYN scan)
 
 ```
 
@@ -80,7 +65,7 @@ This sends stealthy SYN packets (common for intrusion attempts).
 
 ### 🧨 2. **TCP SYN Flood (DoS Simulation)**
 
-```bash
+```
 sudo hping3 -S <target-ip> -p 80 --flood
 ```
 
@@ -96,7 +81,7 @@ Stop with `Ctrl + C`.
 
 ### 🐍 3. **Ping of Death (ICMP flood)**
 
-```bash
+```
 sudo hping3 -1 <target-ip> --flood
 ```
 
@@ -135,3 +120,8 @@ Or target a device on your LAN:
 ```bash
 sudo nmap -sS 192.168.1.5
 ```
+
+# todo 
+- remember to find a good dataset for the ML model for new test 
+- check if dev can merge two or more dataset together to make a hybrid dataset to test and train the network
+- try and make the system show normal data ( but think about this  , it might not be part of this methodology)
