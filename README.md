@@ -23,11 +23,18 @@
 ### how it works:
 
 * It's **sniffing packets** from your `wlan0` interface.
-* For each packet, it's extract few features like `src_bytes`, `protocol_type`, etc.
+* For each packet, it's extract few features like `src_bytes`, `protocol_type`.
 * It passes those features through your `preprocess_function`.
 * Then it uses the trained `RandomForestClassifier` to **predict whether it's normal or an intrusion**.
 * If it's malicious (`prediction == 1`), it prints an alert and writes to `alerts.log`.
+* the intrusion/abnormal traffic it detect is : 
 
+* SYN Flood	hping3 -S --flood -p 80 <target-ip>
+* UDP Flood (Port 53)	hping3 --udp --flood -p 53 <target-ip>
+* ICMP Flood (Ping Flood)	hping3 --icmp --flood <target-ip> OR ping -f <target-ip>
+* Port Scan (Stealth)	nmap -sS <target-ip>
+* Port Scan (Full)	nmap -p 1-1000 <target-ip>
+* ARP Spoofing	arpspoof -i <iface> -t <target> <gateway> 
 ---
 
 
@@ -129,22 +136,36 @@ sudo nmap -sS 192.168.1.5
 deactivate  # if you are in venv
 rm -rf venv
 
-# Make sure your desired pyenv version is active:
+## Make sure your desired pyenv version is active:
 pyenv global 3.x.x   # (replace with your real version)
 
-# Check:
+## Check:
 python --version  # ensure it's the pyenv version
 
-# Recreate venv:
+## Recreate venv:
 python -m venv venv
 source venv/bin/activate
 
-# Upgrade pip to prevent this ever happening again:
+## Upgrade pip to prevent this ever happening again:
 python -m ensurepip --upgrade
 pip install --upgrade pip
 
-# Install Flask again:
+## Install Flask again:
 pip install flask
+
+
+
+# simulation 
+| **Attack/Detection**        | **Testing Command (Kali/Parrot etc.)**                                           |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| **SYN Flood**               | `hping3 -S --flood -p 80 <target-ip>`                                            |
+| **UDP Flood (Port 53)**     | `hping3 --udp --flood -p 53 <target-ip>`                                         |
+| **ICMP Flood (Ping Flood)** | `hping3 --icmp --flood <target-ip>` OR `ping -f <target-ip>` (careful with this) |
+| **Port Scan** (Stealth)     | `nmap -sS <target-ip>`                                                           |
+| **Port Scan** (Full)        | `nmap -p 1-1000 <target-ip>`                                                     |
+| **ARP Spoofing**            | `arpspoof -i <iface> -t <target> <gateway>` (requires `dsniff`)                  |
+
+
 
 
 # REMEMBER 
