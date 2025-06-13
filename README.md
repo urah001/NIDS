@@ -1,5 +1,3 @@
-
-
 # how to run 
 
 - to run the system or program , user first needs to navigate to the dir where the dashboard_server.py is located 
@@ -125,3 +123,29 @@ sudo nmap -sS 192.168.1.5
 - remember to find a good dataset for the ML model for new test 
 - check if dev can merge two or more dataset together to make a hybrid dataset to test and train the network
 - try and make the system show normal data ( but think about this  , it might not be part of this methodology)
+
+# incase of environment problem
+
+deactivate  # if you are in venv
+rm -rf venv
+
+# Make sure your desired pyenv version is active:
+pyenv global 3.x.x   # (replace with your real version)
+
+# Check:
+python --version  # ensure it's the pyenv version
+
+# Recreate venv:
+python -m venv venv
+source venv/bin/activate
+
+# Upgrade pip to prevent this ever happening again:
+python -m ensurepip --upgrade
+pip install --upgrade pip
+
+# Install Flask again:
+pip install flask
+
+
+# REMEMBER 
+turn back to the version you used to create your model/enviroment before you run this 
