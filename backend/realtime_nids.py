@@ -1,9 +1,9 @@
-# realtime_nids.py
 import joblib
 from scapy.all import sniff, IP, TCP, UDP
 from preprocess_function import preprocess_function  # Adjust if needed
 import warnings
 warnings.filterwarnings("ignore")
+# realtime_nids.py
 
 model = joblib.load('nids_model.pkl')
 
